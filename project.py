@@ -58,8 +58,11 @@ def start_quiz():
     print()
     print(f"Your score: {score}/5")
 
-    with open("scores.json", "r") as file:
-        scores = json.load(file)
+    try:
+        with open("scores.json", "r") as file:
+            scores = json.load(file)
+    except FileNotFoundError:
+        scores = []
 
     scores.append({
         "score": score,
@@ -71,8 +74,11 @@ def start_quiz():
 
 
 def previous_score():
-    with open("scores.json", "r") as file:
-        scores = json.load(file)
+    try:
+        with open("scores.json", "r") as file:
+            scores = json.load(file)
+    except FileNotFoundError:
+        scores = []
 
     if len(scores) == 0:
         print("No previous scores.")
